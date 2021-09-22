@@ -74,28 +74,7 @@
       font-size: 3em;
       margin-top: 0;
     }
-    p {
-      margin-top: 0;
-    }
-    #card {
-      box-shadow: 0 0 3px #3761a8;
-      display: flex;
-      justify-content: center;
-      padding: 1em;
-      font-weight: bold;
-      font-size: 1.2em;
-      color: white;
-    }
-    #resultSection {
-      width: 80%;
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-gap: 1em;
-      @media (min-width: 700px) {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-    #pagination {
+    #tagList {
       display: flex;
       width: 80%;
       margin-top: 0;
@@ -104,7 +83,15 @@
       height: 40px;
       justify-content: space-evenly;
     }
-    #pagination-item > a{
+    #tag {
+      border: 2px solid #feca1b;
+      color: white;
+      padding: 0.5em 1em;
+      width: 100px;
+      text-align: center;
+      border-radius: 1em;
+    }
+    a {
       border: 2px solid #feca1b;
       color: white;
       padding: 0.5em 1em;
@@ -114,28 +101,15 @@
     }
   </style>
   <body>
-    <main>
-      <h1>Pokedex</h1>
-      <ul id="pagination">
-        <li id="pagination-item">
-          <a href="${pageContext.request.contextPath}/${page-1}">Anterior</a>
+    <h1>${pokemon.name}</h1>
+    <h2>Groups</h2>
+    <ul id="tagList">
+      <c:forEach var="group" items="${pokemon.egg_groups}">
+        <li id="tag">
+          ${group.name}
         </li>
-        <li id="pagination-item">
-          <a href="${pageContext.request.contextPath}/${page+1}">Siguiente</a>
-        </li>
-      </ul>
-      <section id="resultSection">
-        <c:forEach var="pokemon" items="${pokemonList}">
-          <a
-            id="cardLink"
-            href="${pageContext.request.contextPath}/pokemon/?url=${pokemon.url}"
-          >
-            <div id="card">
-              ${pokemon.name}
-            </div>
-          </a>
-        </c:forEach>
-      </section>
-    </main>
+      </c:forEach>
+    </ul>
+    <a href="${pageContext.request.contextPath}/0">See All</a>
   </body>
 </html>

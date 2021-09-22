@@ -50,7 +50,7 @@ public class PokedexService {
 
     public Pokemon getPokemon(String id){
         String url = "https://pokeapi.co/api/v2/pokemon-species/"+id+"/";
-        Pokemon pokemon = restTemplate.getForObject(url, Pokemon.class);
+        Pokemon pokemon = restTemplate.exchange(url, HttpMethod.GET,entity,Pokemon.class).getBody();
         System.out.println("Pokemon: "+ pokemon.getName());
         return pokemon;
     }
